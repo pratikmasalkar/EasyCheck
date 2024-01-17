@@ -5,5 +5,13 @@
     <string name="desgin_by_npratik_masalkar">Desgin By\nPratik Masalkar</string>
     <string name='Welcome'>Welcome to</string>
     <string name='createAcc'>Create\nAccount</string>
-    <string name='register_email_hint'>Enter Your Email Here\n</string>
+    <string name="Enter_Your_Name">Enter Your Name</string>
+    <string name='register_email_hint'>Enter Your Email</string>
+    <string name="enter_roll_no">Enter 7 Digit RollNo</string>
+
+
+    <string-array name="batch">
+        <item>2022-2023</item>
+        <item>2023-2025</item>
+    </string-array>
 </resources>
