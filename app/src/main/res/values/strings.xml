@@ -1,3 +1,9 @@
 <resources>
-    <string name="app_name">EasyCheck</string>
+    <string name='app_name'>EasyCheck</string>
+    <string name='effortless_attendance_n_more_time_for_education'>Effortless Attendance,\n More Time for Education</string>
+    <string name='easycheck'>EasyCheck</string>
+    <string name="desgin_by_npratik_masalkar">Desgin By\nPratik Masalkar</string>
+    <string name='Welcome'>Welcome to</string>
+    <string name='createAcc'>Create\nAccount</string>
+    <string name='register_email_hint'>Enter Your Email Here\n</string>
 </resources>
