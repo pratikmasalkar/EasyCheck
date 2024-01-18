@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1096216305887",
+    "project_id": "easycheck-b6d05",
+    "storage_bucket": "easycheck-b6d05.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1096216305887:android:44891e96db75d8f73a096a",
+        "android_client_info": {
+          "package_name": "com.example.easycheck"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLboAkTyy9W8HKGgWg-V5CN4zQLCgu5ow"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
