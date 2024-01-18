@@ -8,9 +8,12 @@
     <string name="Enter_Your_Name">Enter Your Name</string>
     <string name='register_email_hint'>Enter Your Email</string>
     <string name="enter_roll_no">Enter 7 Digit RollNo</string>
+    <string name="Enter_Mobile_No">Enter Mobile No</string>
+    <string name="Enter_password">Enter Password</string>
 
 
     <string-array name="batch">
+        <item>Select Batch</item>
         <item>2022-2023</item>
         <item>2023-2025</item>
     </string-array>
