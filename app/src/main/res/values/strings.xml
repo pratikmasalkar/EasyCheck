@@ -1,6 +1,8 @@
 <resources>
     <string name='app_name'>EasyCheck</string>
-    <string name='effortless_attendance_n_more_time_for_education'>Effortless Attendance,\n More Time for Education</string>
+    <string name='effortless_attendance_n_more_time_for_education'>Effortless Attendance,\n More Time More Education</string>
+    <string name='effortless_attendance_n_more_time__education'>Smart Attendance\nMore Time \nMore Education</string>
+
     <string name='easycheck'>EasyCheck</string>
     <string name="desgin_by_npratik_masalkar">Desgin By\nPratik Masalkar</string>
     <string name='Welcome'>Welcome to</string>
@@ -10,11 +12,24 @@
     <string name="enter_roll_no">Enter 7 Digit RollNo</string>
     <string name="Enter_Mobile_No">Enter Mobile No</string>
     <string name="Enter_password">Enter Password</string>
+    <string name="Welcome_To">Welcome To \n</string>
+    <string name="don_t_have_account_nregister_here">Don\'t Have Account ! \nRegister Here</string>
+    <string name="use_another_method">"Use Another Method"</string>
+    <string name="etEmailMobileRoll">Enter Email\\Mobile\\Roll No</string>
+    <string name="login_with_id_password">Login With Id Password</string>
+    <string name="Enter_Otp">Enter Otp</string>
+
+    <string name="welcome_message">Welcome</string>
+    <string name="permissions_explanation">To ensure you get the most out of our app, we require a few permissions:\n
+        - Location: This allows us to track your attendance accurately and provide location-based features.\n
+        - Notifications: This enables us to send you important updates and reminders about classes and events.\n
+        Please tap the button below to grant these permissions.</string>
+    <string name="grant_permissions">Grant Permissions</string>
 
 
     <string-array name="batch">
         <item>Select Batch</item>
-        <item>2022-2023</item>
+        <item>2022-2024</item>
         <item>2023-2025</item>
     </string-array>
 </resources>

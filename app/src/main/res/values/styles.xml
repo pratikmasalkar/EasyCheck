@@ -7,7 +7,6 @@
     </style>
 
     <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
 
@@ -47,5 +46,7 @@
         <item name="android:textColor">@color/colorAccent</item>
         <item name="android:paddingLeft">5dp</item>
     </style>
-
+<style name="modifiedEditText." parent="parent">
+    <item name="android:editTextStyle">@style/Widget.MaterialComponents.ChipGroup</item>
+</style>
 </resources>

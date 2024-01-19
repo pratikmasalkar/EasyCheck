@@ -90,7 +90,8 @@
                         android:layout_height="wrap_content"
                         android:paddingBottom="10dp"
                         app:boxStrokeColor="@color/text_color"
-                        app:hintTextColor="@color/text_color">
+                        app:hintTextColor="@color/text_color"
+                        >
 
                         <EditText
                             android:id="@+id/etName"
@@ -185,7 +186,8 @@
                             android:layout_marginLeft="50dp"
                             android:layout_marginTop="-30dp"
                             android:entries="@array/batch"
-                            android:padding="10dp">
+                            android:padding="10dp"
+                            tools:ignore="TouchTargetSizeCheck">
 
                         </Spinner>
 

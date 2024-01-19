@@ -6,7 +6,9 @@ public class Student {
     private String mobile;
     private String rollno;
     private String batch;
+public Student(){
 
+}
     public Student(String name,String email, String mobile, String rollno, String batch) {
         this.name = name;
         this.email=email;
