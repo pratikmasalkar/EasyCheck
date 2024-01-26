@@ -127,45 +127,43 @@ public class Registration extends AppCompatActivity {
 
 
     private void createUserInFirebase(String email, String password) {
-        auth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            String uid = auth.getCurrentUser().getUid();
-                            saveStudentData(uid, name, email, mobile, rollno, batch);
-                            Toast.makeText(Registration.this, "Registration successful!", Toast.LENGTH_SHORT).show();
+        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    String uid = auth.getCurrentUser().getUid();
+                    saveStudentData(uid, name, email, mobile, rollno, batch);
+                    Toast.makeText(Registration.this, "Registration successful!", Toast.LENGTH_SHORT).show();
 
-                            // Clear input fields
-                            etName.setText("");
-                            etEmail.setText("");
-                            etMobile.setText("");
-                            etRollno.setText("");
-                            etPassword.setText("");
-                            // Navigate to another activity
-//                            startActivity(new Intent(Registration.this, LoginActivity.class));
-                            overridePendingTransition(R.anim.slide_in_left, android.R.anim.slide_out_right);
-                            finish();
+                    // Clear input fields
+                    etName.setText("");
+                    etEmail.setText("");
+                    etMobile.setText("");
+                    etRollno.setText("");
+                    etPassword.setText("");
+                    // Navigate to another activity
+                    // startActivity(new Intent(Registration.this, LoginActivity.class));
+                    overridePendingTransition(R.anim.slide_in_left, android.R.anim.slide_out_right);
+                    finish();
 
-                        } else {
-                            String errorMsg = task.getException().getMessage().toString();
-                            if(errorMsg.contains("password")){
-                                etPassword.setError(errorMsg);
-                                etPassword.requestFocus();
-                            } else if (errorMsg.contains("email")) {
-                                etEmail.setError(errorMsg);
-                                etEmail.requestFocus();
-                            }else {
-                                Toast.makeText(Registration.this, errorMsg, Toast.LENGTH_SHORT).show();
-                            }
-                        }
+                } else {
+                    String errorMsg = task.getException().getMessage().toString();
+                    if (errorMsg.contains("password")) {
+                        etPassword.setError(errorMsg);
+                        etPassword.requestFocus();
+                    } else if (errorMsg.contains("email")) {
+                        etEmail.setError(errorMsg);
+                        etEmail.requestFocus();
+                    } else {
+                        Toast.makeText(Registration.this, errorMsg, Toast.LENGTH_SHORT).show();
                     }
-                });
+                }
+            }
+        });
     }
 
 
-    private void saveStudentData(String uid, String name, String email, String mobile, String
-            rollno, String batch) {
+    private void saveStudentData(String uid, String name, String email, String mobile, String rollno, String batch) {
         try {
             Student student = new Student(name, email, mobile, rollno, batch);
             studentsRef.child(uid).setValue(student);
