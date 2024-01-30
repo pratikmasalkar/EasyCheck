@@ -3,9 +3,9 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="text_color">#0099FF</color>
+    <color name="backgroudCLr">#E4EAE4</color>
 
-
-
+    <color name="headerBg">#005B98</color>
     <!--colors for modern UI-->
     <color name="loginBkColor">#F0F0F0</color>
 

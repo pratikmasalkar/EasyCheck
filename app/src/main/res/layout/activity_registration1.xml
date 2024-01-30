@@ -78,7 +78,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:padding="10dp"
-                        android:text="Create Account\n-------------------"
+                        android:text="Create Account"
                         android:textColor="@color/black"
                         android:textStyle="bold" />
 
@@ -90,8 +90,7 @@
                         android:layout_height="wrap_content"
                         android:paddingBottom="10dp"
                         app:boxStrokeColor="@color/text_color"
-                        app:hintTextColor="@color/text_color"
-                        >
+                        app:hintTextColor="@color/text_color">
 
                         <EditText
                             android:id="@+id/etName"
@@ -162,37 +161,51 @@
 
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <com.google.android.material.textfield.TextInputLayout
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:boxStrokeColor="@color/text_color"
-                        app:boxStrokeWidth="2dp"
-                        app:boxStrokeWidthFocused="2dp"
-                        app:hintTextColor="@color/text_color">
+                        android:layout_height="50dp"
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:paddingLeft="10dp"
                             android:paddingTop="15dp"
-                            android:text="Batch :"
+                            android:text="Course :"
                             android:textStyle="bold" />
 
                         <Spinner
 
-                            android:id="@+id/mySpinner"
-                            android:layout_width="match_parent"
+                            android:id="@+id/courseSpinner"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="50dp"
-                            android:layout_marginTop="-30dp"
-                            android:entries="@array/batch"
-                            android:padding="10dp"
+                            android:layout_marginLeft="0dp"
+                            android:layout_marginTop="0dp"
+                            android:padding="0dp"
                             tools:ignore="TouchTargetSizeCheck">
 
                         </Spinner>
 
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="0dp"
+                            android:paddingTop="15dp"
+                            android:text="Batch :"
+                            android:textStyle="bold" />
 
-                    </com.google.android.material.textfield.TextInputLayout>
+                        <Spinner
+                            android:id="@+id/batchSpinner"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="0dp"
+                            android:layout_marginTop="0dp"
+                            android:entries="@array/batch"
+                            android:padding="0dp"
+                            tools:ignore="TouchTargetSizeCheck">
+
+                        </Spinner>
+                    </LinearLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"

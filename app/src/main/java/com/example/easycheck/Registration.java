@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -21,11 +23,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Registration extends AppCompatActivity {
     private EditText etName, etEmail, etMobile, etRollno, etPassword;
-    private Spinner etBatch;
+    private Spinner courseSpinner,batchSpinner;
     private FirebaseAuth auth;
-    private DatabaseReference studentsRef;
+    private DatabaseReference studentsRef, courseRef,batchRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,11 +41,48 @@ public class Registration extends AppCompatActivity {
         etEmail = findViewById(R.id.etEmail);
         etMobile = findViewById(R.id.mobileNo);
         etRollno = findViewById(R.id.rollNo);
-        etBatch = findViewById(R.id.mySpinner);
+        courseSpinner = findViewById(R.id.courseSpinner);
+        batchSpinner=findViewById(R.id.batchSpinner);
         etPassword = findViewById(R.id.password);
 
         auth = FirebaseAuth.getInstance();
         studentsRef = FirebaseDatabase.getInstance().getReference("students");
+        courseRef = FirebaseDatabase.getInstance().getReference("courses");
+        batchRef = FirebaseDatabase.getInstance().getReference("batches");
+
+        courseRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<String> courseNames = new ArrayList<>();
+                for (DataSnapshot courseSnapshot : snapshot.getChildren()) {
+                    String courseName = courseSnapshot.child("name").getValue(String.class);
+                    courseNames.add(courseName);
+                }
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(Registration.this, android.R.layout.simple_spinner_item, courseNames);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                courseSpinner.setAdapter(adapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(Registration.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        // Populate teacher spinners (implementation
+        courseSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String selectedCourse = parent.getItemAtPosition(position).toString();
+                populateBatchSpinners(selectedCourse);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
 
         findViewById(R.id.registerButton).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,7 +92,31 @@ public class Registration extends AppCompatActivity {
         });
     }
 
-    private String name, email, mobile, rollno, batch, password;
+    private void populateBatchSpinners(String courseName) {
+        batchRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<String> batches = new ArrayList<>();
+                for (DataSnapshot batchSnapshot : snapshot.getChildren()) {
+                    String batchCourse = batchSnapshot.child("course").getValue(String.class);
+                    if (batchCourse != null && batchCourse.equals(courseName)) {
+                        String batchName = batchSnapshot.child("name").getValue(String.class);
+                        batches.add(batchName);
+                    }
+                }
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(Registration.this, android.R.layout.simple_spinner_item, batches);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                batchSpinner.setAdapter(adapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private String name, email, mobile, rollno, course,batch, password;
 
     private void registerUser() {
 
@@ -58,12 +124,13 @@ public class Registration extends AppCompatActivity {
         this.email = etEmail.getText().toString();
         this.mobile = etMobile.getText().toString();
         this.rollno = etRollno.getText().toString();
-        this.batch = etBatch.getSelectedItem().toString();
+        this.course = courseSpinner.getSelectedItem().toString();
+        this.batch=batchSpinner.getSelectedItem().toString();
         this.password = etPassword.getText().toString();
 
 
         // Input validation
-        if (name.isEmpty() || email.isEmpty() || mobile.isEmpty() || rollno.isEmpty() || batch.isEmpty() || password.isEmpty()) {
+        if (name.isEmpty() || email.isEmpty() || mobile.isEmpty() || rollno.isEmpty() || course.isEmpty() || password.isEmpty()) {
             Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -132,7 +199,7 @@ public class Registration extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     String uid = auth.getCurrentUser().getUid();
-                    saveStudentData(uid, name, email, mobile, rollno, batch);
+                    saveStudentData(uid, name, email, mobile, rollno, course,batch);
                     Toast.makeText(Registration.this, "Registration successful!", Toast.LENGTH_SHORT).show();
 
                     // Clear input fields
@@ -163,9 +230,9 @@ public class Registration extends AppCompatActivity {
     }
 
 
-    private void saveStudentData(String uid, String name, String email, String mobile, String rollno, String batch) {
+    private void saveStudentData(String uid, String name, String email, String mobile, String rollno, String course,String batch) {
         try {
-            Student student = new Student(name, email, mobile, rollno, batch);
+            Student student = new Student(name, email, mobile, rollno,course, batch);
             studentsRef.child(uid).setValue(student);
         } catch (Exception e) {
             Toast.makeText(this, e.getMessage().toString(), Toast.LENGTH_LONG);

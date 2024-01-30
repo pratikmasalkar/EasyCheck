@@ -24,6 +24,9 @@
     <style name="viewParent.headerText.NoMode">
         <item name="android:textColor">@color/darkTextColor</item>
     </style>
+    <style name="BoldTextAppearance">
+        <item name="android:textStyle">bold</item>
+    </style>
 
     <style name="parent">
         <item name="android:layout_width">match_parent</item>

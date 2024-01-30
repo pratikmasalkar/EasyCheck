@@ -5,15 +5,19 @@ public class Student {
     private String email;
     private String mobile;
     private String rollno;
+    private String course;
     private String batch;
-public Student(){
 
-}
-    public Student(String name,String email, String mobile, String rollno, String batch) {
+    public Student() {
+
+    }
+
+    public Student(String name, String email, String mobile, String rollno, String course, String batch) {
         this.name = name;
-        this.email=email;
+        this.email = email;
         this.mobile = mobile;
         this.rollno = rollno;
+        this.course = course;
         this.batch = batch;
     }
 
@@ -21,15 +25,21 @@ public Student(){
     public String getName() {
         return name;
     }
-    public String getEmail(){
+
+    public String getEmail() {
         return email;
     }
+
     public String getMobile() {
         return mobile;
     }
 
     public String getRollno() {
         return rollno;
+    }
+
+    public String getCourse() {
+        return course;
     }
 
     public String getBatch() {

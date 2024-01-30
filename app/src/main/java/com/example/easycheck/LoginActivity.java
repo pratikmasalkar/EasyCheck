@@ -45,7 +45,7 @@ public class LoginActivity extends AppCompatActivity {
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
-            startActivity(new Intent(LoginActivity.this, Welcome.class));
+            startActivity(new Intent(LoginActivity.this, Dashboard.class));
             finish();
         }
 
@@ -211,7 +211,7 @@ public class LoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Authentication successful, proceed to Welcome Activity
-                            startActivity(new Intent(LoginActivity.this, Welcome.class));
+                            startActivity(new Intent(LoginActivity.this, Dashboard.class));
                         } else {
                             etPassword.setError("Wrong Password");
                             Toast.makeText(LoginActivity.this, "Wrong Password", Toast.LENGTH_SHORT).show();
