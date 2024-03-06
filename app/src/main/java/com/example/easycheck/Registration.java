@@ -93,7 +93,7 @@ public class Registration extends AppCompatActivity {
     }
 
     private void populateBatchSpinners(String courseName) {
-        batchRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        batchRef.child("").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 List<String> batches = new ArrayList<>();

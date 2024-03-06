@@ -5,7 +5,15 @@
     <color name="text_color">#0099FF</color>
     <color name="backgroudCLr">#E4EAE4</color>
 
+
+    <color name="colorPresent">#00C609</color>
+    <color name="colorAbsent">#EB0000</color>
+    <color name="colorInvalid">#EEA700</color>
+    <color name="colorIncomplete">#239EFF</color>
+    <color name="colorDefault">#000000</color>
+
     <color name="headerBg">#005B98</color>
+    <color name="gray">#CCCCCC</color>
     <!--colors for modern UI-->
     <color name="loginBkColor">#F0F0F0</color>
 

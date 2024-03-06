@@ -74,7 +74,59 @@
                 android:textAlignment="center"
                 android:textSize="20sp"
                 android:textStyle="bold" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
+            <TextView
+                android:id="@+id/currentDateTv"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textColor="#14C100"
+                android:textAlignment="viewStart"
+                android:layout_marginLeft="10dp"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/yellow"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="Attendance Completed !!!"
+                    android:textColor="#EFCC00"
+                    android:textAlignment="viewEnd"
+                    android:visibility="gone"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/green"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="Attendance Completed !!!"
+                android:textColor="#14C100"
+                android:textAlignment="viewEnd"
+                android:visibility="gone"
+                android:layout_marginLeft="10dp"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/red"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:textColor="#FF0000"
+                    android:textAlignment="viewEnd"
+                    android:visibility="invisible"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
