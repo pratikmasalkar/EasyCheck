@@ -20,11 +20,10 @@
             android:padding="10dp">
 
             <TextView
-                android:id="@+id/greetmsg"
+                android:id="@+id/greetingMsg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:text="Good Morning"
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -33,7 +32,7 @@
                 android:id="@+id/userName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/greetmsg"
+                android:layout_below="@+id/greetingMsg"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -41,7 +40,7 @@
             <ImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_alignRight="@+id/greetmsg"
+                android:layout_alignRight="@+id/greetingMsg"
                 android:layout_alignParentRight="true"
                 android:src="@drawable/ic_login_hero" />
         </RelativeLayout>
@@ -241,5 +240,22 @@
             android:layout_height="match_parent" />
 
     </androidx.core.widget.NestedScrollView>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_gravity="bottom"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_navigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            app:menu="@menu/bottom_navigation_menu" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </LinearLayout>

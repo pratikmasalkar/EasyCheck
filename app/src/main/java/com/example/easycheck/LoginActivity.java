@@ -3,6 +3,8 @@ package com.example.easycheck;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -32,8 +34,9 @@ import java.util.regex.Pattern;
 public class LoginActivity extends AppCompatActivity {
     private EditText etEmailMobileRoll, etPassword, etMobileOtp, etOtp;
     private Button btnLoginPassword, btnLoginOtp;
-    private TextView dontAccUIdPass, tvLoginOtp, tvLoginPasswordBack, dontAccMobOtp;
+    private TextView dontAccUIdPass, tvLoginOtp, tvLoginPasswordBack, dontAccMobOtp,tvForgotPassword,tvForgotPassword2;
     private LinearLayout downViewUIDPass, downViewMobOtp;
+    private String enteredId;
     private TextInputLayout etEmailMobileRollView, etPasswordView, etMobileOtpView, etOtpView;
 
     FirebaseAuth auth = FirebaseAuth.getInstance();
@@ -68,6 +71,8 @@ public class LoginActivity extends AppCompatActivity {
         downViewMobOtp = findViewById(R.id.downViewMobOtp);
 
         tvLoginPasswordBack = findViewById(R.id.tvLoginPasswordBack);
+        tvForgotPassword=findViewById(R.id.tvForgotPassword);
+        tvForgotPassword2=findViewById(R.id.tvForgotPassword2);
 
         String EmailMobileRoll = etEmailMobileRoll.getText().toString().trim();
         String password = etPassword.getText().toString().trim();
@@ -81,9 +86,11 @@ public class LoginActivity extends AppCompatActivity {
                 tvLoginOtp.setVisibility(View.GONE);
                 dontAccUIdPass.setVisibility(View.GONE);
                 downViewUIDPass.setVisibility(View.GONE);
+                tvForgotPassword.setVisibility(View.GONE);
 
                 etMobileOtpView.setVisibility(View.VISIBLE);
                 etOtpView.setVisibility(View.VISIBLE);
+                tvForgotPassword2.setVisibility(View.VISIBLE);
                 btnLoginOtp.setVisibility(View.VISIBLE);
                 dontAccMobOtp.setVisibility(View.VISIBLE);
                 downViewMobOtp.setVisibility(View.VISIBLE);
@@ -102,9 +109,11 @@ public class LoginActivity extends AppCompatActivity {
                 tvLoginOtp.setVisibility(View.VISIBLE);
                 dontAccUIdPass.setVisibility(View.VISIBLE);
                 downViewUIDPass.setVisibility(View.VISIBLE);
+                tvForgotPassword.setVisibility(View.VISIBLE);
 
                 etMobileOtpView.setVisibility(View.GONE);
                 etOtpView.setVisibility(View.GONE);
+                tvForgotPassword2.setVisibility(View.GONE);
                 btnLoginOtp.setVisibility(View.GONE);
                 dontAccMobOtp.setVisibility(View.GONE);
                 downViewMobOtp.setVisibility(View.GONE);
@@ -114,12 +123,18 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        // ... (continued from previous code)
+        tvForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                enteredId = etEmailMobileRoll.getText().toString().trim();
+                showForgotPasswordDialog(); // Call your new method
+            }
+        });
 
         btnLoginPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String enteredId = etEmailMobileRoll.getText().toString().trim();
+                enteredId = etEmailMobileRoll.getText().toString().trim();
                 String password = etPassword.getText().toString().trim();
 
                 // Validate input (add validation logic here)
@@ -149,6 +164,88 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void showForgotPasswordDialog() {
+        EditText emailOrMobileEditText = new EditText(this);
+        emailOrMobileEditText.setHint("Enter Email/Mobile/Roll No");
+        if(enteredId!=null){
+            emailOrMobileEditText.setText(enteredId);
+        }
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Reset Password")
+                .setView(emailOrMobileEditText)
+                .setPositiveButton("Send Reset Link", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String emailOrMobile = emailOrMobileEditText.getText().toString().trim();
+                        sendResetPasswordEmail(emailOrMobile);
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .create()
+                .show();
+    }
+
+    private void sendResetPasswordEmail(String emailOrMobile) {
+        String id = ""; // Determine ID type (email, mobile, or roll number)
+        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("students");
+
+        if (isValidEmail(emailOrMobile)) {
+            id = "email";
+        } else if (isValidMobileNumber(emailOrMobile)) {
+            id = "mobile"; // Implement logic to retrieve email from database
+        } else if (isValidRollNumber(emailOrMobile)) {
+            id="rollno";
+        } else {
+            // Handle invalid input
+            Toast.makeText(LoginActivity.this, "Invalid user ID", Toast.LENGTH_LONG).show();
+            showForgotPasswordDialog();
+            return;
+        }
+
+        userRef.orderByChild(id).equalTo(emailOrMobile)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists()) {
+                            DataSnapshot userSnapshot = snapshot.getChildren().iterator().next();
+                            String email = userSnapshot.child("email").getValue(String.class);
+                            if (email != null) {
+                                FirebaseAuth auth = FirebaseAuth.getInstance();
+                                auth.sendPasswordResetEmail(email)
+                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if (task.isSuccessful()) {
+                                                    Toast.makeText(LoginActivity.this, "Password reset email sent!", Toast.LENGTH_SHORT).show();
+                                                } else {
+                                                    Toast.makeText(LoginActivity.this, "Failed to send email: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                                }
+                                            }
+                                        });
+                            } else {
+                                Toast.makeText(LoginActivity.this, "Email not found for this User ID", Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            Toast.makeText(LoginActivity.this, "User ID not found", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        // Handle database error
+                        Toast.makeText(LoginActivity.this, "Database error", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+
 
     private void authenticateWithRollNumber(String enteredId, String password) {
     }

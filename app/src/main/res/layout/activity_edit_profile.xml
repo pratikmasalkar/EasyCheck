@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/headerBg"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:padding="20dp">
+
+            <TextView
+                android:id="@+id/backbtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/back_arw"
+                android:onClick="backToProfile"
+                android:paddingTop="10dp"></TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/backbtn"
+                android:gravity="start"
+                android:onClick="backToProfile"
+                android:paddingLeft="10dp"
+                android:paddingTop="2dp"
+                android:text="Profile"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+
+        </RelativeLayout>
+    </LinearLayout>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="18dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="12dp"
+                android:text="Edit Profile"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                app:boxStrokeColor="@color/text_color"
+                app:hintTextColor="@color/text_color">
+
+                <EditText
+                    android:id="@+id/edit_text_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/Enter_Your_Name"
+                    android:inputType="textPersonName"
+                    android:maxLines="1"></EditText>
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                app:boxStrokeColor="@color/text_color"
+                app:hintTextColor="@color/text_color">
+
+                <EditText
+                    android:id="@+id/edit_text_mobile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:hint="@string/Enter_Mobile_No" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                app:boxStrokeColor="@color/text_color"
+                app:hintTextColor="@color/text_color">
+
+                <EditText
+                    android:id="@+id/edit_text_mother"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Enter Mother Name"
+                    android:inputType="textPersonName"
+                    android:maxLines="1"></EditText>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                app:boxStrokeColor="@color/text_color"
+                app:hintTextColor="@color/text_color">
+
+                <EditText
+                    android:id="@+id/edit_text_guardian"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Enter Guardian Name"
+                    android:inputType="textPersonName"
+                    android:maxLines="1"></EditText>
+            </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="170dp"
+                android:layout_marginRight="10dp"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                app:boxStrokeColor="@color/text_color"
+                app:hintTextColor="@color/text_color">
+
+                <EditText
+                    android:id="@+id/edit_text_relegion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:hint="Relegion" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                app:boxStrokeColor="@color/text_color"
+                app:hintTextColor="@color/text_color">
+
+                <EditText
+                    android:id="@+id/edit_text_caste"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:hint="Caste" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:boxStrokeColor="@color/text_color"
+                app:hintTextColor="@color/text_color">
+
+                <EditText
+                    android:id="@+id/edit_text_blood"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:hint="Blood grp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <RadioGroup
+                android:id="@+id/radio_group_gender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/radio_button_male"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="Male" />
+
+                <RadioButton
+                    android:id="@+id/radio_button_female"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:text="Female" />
+
+
+                <RadioButton
+                    android:id="@+id/radio_button_other"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:text="Other" />
+            </RadioGroup>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="170dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_height="wrap_content"
+                    app:boxStrokeColor="@color/text_color"
+                    app:hintTextColor="@color/text_color">
+
+                    <EditText
+                        android:id="@+id/edit_text_abc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="10dp"
+                        android:hint="ABC Id" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="170dp"
+                    android:layout_height="wrap_content"
+                    app:boxStrokeColor="@color/text_color"
+                    app:hintTextColor="@color/text_color">
+
+                    <EditText
+                        android:id="@+id/edit_text_prn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="10dp"
+                        android:hint="PRN No" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lato"
+                android:text="If you want to Update Roll No or Email
+            \nPlease Contact With Class Co-Ordinator"
+                android:textColor="@color/gray">
+
+            </TextView>
+
+            <Button
+                android:id="@+id/button_save"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Update Profile" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

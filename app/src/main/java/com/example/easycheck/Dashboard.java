@@ -5,12 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -21,6 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -28,8 +31,8 @@ import java.util.Locale;
 import java.util.Map;
 
 public class Dashboard extends AppCompatActivity {
-    private TextView userName;
-    private String batchName,name,rollno,course;
+    private TextView userName,greetingMsg;
+    private String batchName,name,rollno,course,userId;
     private ListView list_subjects,attendaceStatusList;
     Map<String, String> subjects;
     private DatabaseReference batchRef;
@@ -39,14 +42,35 @@ public class Dashboard extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                // Handle each item click event
+                Integer id =item.getItemId();
+                if(id==R.id.navigation_profile) {
+                    // Open DashboardActivity
+                    Intent intent = new Intent(Dashboard.this,Profile.class);
+                    intent.putExtra("userId", userId);
+                    intent.putExtra("course", course);
+                    startActivity(intent);
+                    return true;
+                }else {
+                    // Open ProfileActivity
+                    return true;
+                }
+            }
+        });
+
         userName = findViewById(R.id.userName);
         list_subjects = findViewById(R.id.list_subjects);
         attendaceStatusList=findViewById(R.id.attendaceStatusList);
-
+        greetingMsg=findViewById(R.id.greetingMsg);
+        setGreetingMessage();
         // Check for current user
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser != null) {
-            String userId = currentUser.getUid();
+            userId = currentUser.getUid();
             // Fetch user data from Firebase Realtime Database
             DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("students");
             userRef.child(userId)
@@ -71,8 +95,7 @@ public class Dashboard extends AppCompatActivity {
                         }
                     });
         } else {
-            // Handle the case where no user is logged in
-            // (You might want to redirect to the login screen)
+
         }
 
 
@@ -160,6 +183,19 @@ public class Dashboard extends AppCompatActivity {
         finish();
     }
 
+    private void setGreetingMessage() {
+        Calendar calendar = Calendar.getInstance();
+        int timeOfDay = calendar.get(Calendar.HOUR_OF_DAY);
+        String greeting;
+        if (timeOfDay >= 0 && timeOfDay < 12) {
+            greeting = "Good Morning";
+        } else if (timeOfDay >= 12 && timeOfDay < 18) {
+            greeting = "Good Afternoon";
+        } else {
+            greeting = "Good Evening";
+        }
+        greetingMsg.setText(greeting);
+    }
     public void signOut(View view) {
         FirebaseAuth.getInstance().signOut();
 

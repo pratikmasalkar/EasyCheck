@@ -104,7 +104,7 @@
                 android:id="@+id/etPasswordView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="10dp"
+                android:paddingBottom="5dp"
                 app:boxStrokeColor="@color/text_color"
                 app:hintTextColor="@color/text_color">
 
@@ -117,6 +117,15 @@
                     android:maxLines="1"></EditText>
 
             </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:id="@+id/tvForgotPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:layout_gravity="end"
+                android:text="Forgot Password?"
+                android:fontFamily="@font/lato_bold"
+                android:textColor="@color/text_color" />
 
             <Button
                 android:id="@+id/btnLoginPassword"
@@ -213,7 +222,7 @@
                 android:id="@+id/etOtpView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="10dp"
+                android:paddingBottom="5dp"
                 app:boxStrokeColor="@color/text_color"
                 app:hintTextColor="@color/text_color"
                 android:visibility="gone">
@@ -228,7 +237,17 @@
                     ></EditText>
 
             </com.google.android.material.textfield.TextInputLayout>
-
+            <TextView
+                android:id="@+id/tvForgotPassword2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:layout_gravity="end"
+                android:visibility="gone"
+                android:text="Forgot Password?"
+                android:fontFamily="@font/lato_bold"
+                android:textColor="@color/text_color"
+                tools:ignore="DuplicateIds" />
             <Button
                 android:id="@+id/btnLoginOtp"
                 android:layout_marginTop="10dp"
